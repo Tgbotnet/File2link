@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard &middot; My File 2 Link</title>
+    <link rel="icon" href="/logo.png" type="image/png">
+    <meta name="robots" content="noindex">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darker: '#0a0a0a',
+                        dark: '#111111',
+                        darkcard: '#1a1a1a',
+                        primary: '#3b82f6',
+                        danger: '#ef4444',
+                        warning: '#f59e0b'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0a0a0a; color: #f3f4f6; }
+        .glass-card {
+            background: rgba(26, 26, 26, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navbar -->
+    <nav class="glass-card sticky top-0 z-50 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div class="h-9 w-9 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-blue-500/30">
+                        <svg width="20" height="20" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                            <path d="M13.4 19.6l5.2-5.2" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+                            <path d="M15.1 11.9l1.6-1.6a3.6 3.6 0 015.1 5.1l-1.6 1.6" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+                            <path d="M16.9 20.1l-1.6 1.6a3.6 3.6 0 01-5.1-5.1l1.6-1.6" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <span class="flex flex-col leading-tight">
+                        <span class="font-bold text-lg tracking-tight text-white">My File 2 Link</span>
+                        <span class="text-[11px] font-medium text-gray-500 tracking-wide">Admin &middot; Mr.Aman</span>
+                    </span>
+                </div>
+                <!-- Removed native bandwidth display for new stats component -->
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        
+        <!-- Temporal Bandwidth Statistics Banner -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <!-- Daily Traffic -->
+            <div class="glass-card rounded-2xl p-6 shadow-[0_0_20px_rgba(34,197,94,0.05)] border border-green-500/20 relative overflow-hidden group hover:border-green-500/50 transition-all duration-300">
+                <div class="absolute -right-4 -bottom-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <svg class="w-24 h-24 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <p class="text-xs text-green-400 font-bold uppercase tracking-widest mb-1 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]"></span>
+                    Today's Traffic
+                </p>
+                <h4 class="text-3xl font-extrabold text-white mt-2">{{ bw_daily }}</h4>
+            </div>
+
+            <!-- Weekly Traffic -->
+            <div class="glass-card rounded-2xl p-6 shadow-[0_0_20px_rgba(59,130,246,0.05)] border border-blue-500/20 relative overflow-hidden group hover:border-blue-500/50 transition-all duration-300">
+                <div class="absolute -right-4 -bottom-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <svg class="w-24 h-24 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                </div>
+                <p class="text-xs text-blue-400 font-bold uppercase tracking-widest mb-1 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]"></span>
+                    7-Day Traffic
+                </p>
+                <h4 class="text-3xl font-extrabold text-white mt-2">{{ bw_weekly }}</h4>
+            </div>
+
+            <!-- Monthly Traffic -->
+            <div class="glass-card rounded-2xl p-6 shadow-[0_0_20px_rgba(168,85,247,0.05)] border border-purple-500/20 relative overflow-hidden group hover:border-purple-500/50 transition-all duration-300">
+                <div class="absolute -right-4 -bottom-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <svg class="w-24 h-24 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                </div>
+                <p class="text-xs text-purple-400 font-bold uppercase tracking-widest mb-1 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.8)]"></span>
+                    30-Day Traffic
+                </p>
+                <h4 class="text-3xl font-extrabold text-white mt-2">{{ bw_monthly }}</h4>
+            </div>
+
+            <!-- Lifetime Traffic -->
+            <div class="glass-card rounded-2xl p-6 shadow-[0_0_20px_rgba(245,158,11,0.05)] border border-warning/20 relative overflow-hidden group hover:border-warning/50 transition-all duration-300">
+                <div class="absolute -right-4 -bottom-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <svg class="w-24 h-24 text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                </div>
+                <p class="text-xs text-warning font-bold uppercase tracking-widest mb-1 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-warning shadow-[0_0_8px_rgba(245,158,11,0.8)]"></span>
+                    Lifetime Total
+                </p>
+                <h4 class="text-3xl font-extrabold text-white mt-2">{{ total_bandwidth }}</h4>
+            </div>
+
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- Top Users Panel -->
+            <div class="glass-card rounded-2xl overflow-hidden shadow-2xl">
+                <div class="px-6 py-5 border-b border-gray-800 bg-white/5">
+                    <h3 class="text-lg font-semibold text-white flex items-center gap-2">
+                        <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        Top Users by Bandwidth
+                    </h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-400">
+                        <thead class="text-xs text-gray-400 uppercase bg-black/20">
+                            <tr>
+                                <th scope="col" class="px-6 py-4">User ID</th>
+                                <th scope="col" class="px-6 py-4">Traffic</th>
+                                <th scope="col" class="px-6 py-4 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-800">
+                            {% for user in top_users %}
+                            <tr class="hover:bg-white/5 transition-colors">
+                                <td class="px-6 py-4 font-medium text-gray-200">
+                                    {{ user.id }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="text-primary font-semibold">{{ humanbytes(user.bandwidth_used) }}</span>
+                                </td>
+                                <td class="px-6 py-4 text-right space-x-2 flex justify-end items-center">
+                                    {% if user.id in banned_ids %}
+                                    <span class="px-2 py-1 text-[10px] uppercase tracking-wider font-bold rounded-lg bg-red-900/50 text-red-500 border border-red-500/20 shadow-[0_0_10px_rgba(239,68,68,0.2)]">Banned</span>
+                                    <button onclick="actionUser('{{ user.id }}', 'unban')" class="px-3 py-1.5 text-xs font-medium rounded-lg bg-green-500/10 text-green-500 hover:bg-green-500 hover:text-white border border-green-500/20 transition-all shadow-[0_0_15px_rgba(34,197,94,0.1)]">
+                                        Unban
+                                    </button>
+                                    {% else %}
+                                    <button onclick="actionUser('{{ user.id }}', 'warn')" class="px-3 py-1.5 text-xs font-medium rounded-lg bg-warning/10 text-warning hover:bg-warning hover:text-white border border-warning/20 transition-all shadow-[0_0_15px_rgba(245,158,11,0.1)]">
+                                        Warn
+                                    </button>
+                                    <button onclick="actionUser('{{ user.id }}', 'ban')" class="px-3 py-1.5 text-xs font-medium rounded-lg bg-danger/10 text-danger hover:bg-danger hover:text-white border border-danger/20 transition-all shadow-[0_0_15px_rgba(239,68,68,0.1)]">
+                                        Ban
+                                    </button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr><td colspan="3" class="px-6 py-8 text-center text-gray-500">No user bandwidth data tracked yet.</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Top Files Panel -->
+            <div class="glass-card rounded-2xl overflow-hidden shadow-2xl">
+                <div class="px-6 py-5 border-b border-gray-800 bg-white/5">
+                    <h3 class="text-lg font-semibold text-white flex items-center gap-2">
+                        <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        Top Links / Files
+                    </h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-400">
+                        <thead class="text-xs text-gray-400 uppercase bg-black/20">
+                            <tr>
+                                <th scope="col" class="px-6 py-4">File Name</th>
+                                <th scope="col" class="px-6 py-4">Uploader</th>
+                                <th scope="col" class="px-6 py-4 text-center">Downloads</th>
+                                <th scope="col" class="px-6 py-4 text-right">Traffic</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-800">
+                            {% for file in top_files %}
+                            <tr class="hover:bg-white/5 transition-colors">
+                                <td class="px-6 py-4 font-medium text-gray-200 max-w-[200px] truncate" title="{{ file.file_name }}">
+                                    {{ file.file_name }}
+                                </td>
+                                <td class="px-6 py-4 text-xs text-gray-500">
+                                    {{ file.user_id }}
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    <span class="px-2.5 py-1 text-xs font-bold rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20 shadow-[0_0_10px_rgba(59,130,246,0.1)]">{{ file.downloads | default(0) }}</span>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <span class="text-purple-400 font-semibold">{{ humanbytes(file.bandwidth_used) }}</span>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr><td colspan="4" class="px-6 py-8 text-center text-gray-500">No file bandwidth data tracked yet.</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Banned Users Registry -->
+        <div class="glass-card rounded-2xl overflow-hidden shadow-2xl mt-8">
+            <div class="px-6 py-5 border-b border-red-900/30 bg-red-500/5">
+                <h3 class="text-lg font-semibold text-white flex items-center gap-2">
+                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    Banned Users Registry (Wiped Bandwidth & Legacy Bans)
+                </h3>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-400">
+                    <thead class="text-xs text-gray-400 uppercase bg-black/20">
+                        <tr>
+                            <th scope="col" class="px-6 py-4">User ID</th>
+                            <th scope="col" class="px-6 py-4">Status</th>
+                            <th scope="col" class="px-6 py-4 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-800">
+                        {% for doc in banned_docs %}
+                        <tr class="hover:bg-white/5 transition-colors">
+                            <td class="px-6 py-4 font-medium text-gray-200">
+                                {{ doc.id }}
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-1 text-[10px] uppercase tracking-wider font-bold rounded-lg bg-red-900/50 text-red-500 border border-red-500/20 shadow-[0_0_10px_rgba(239,68,68,0.2)]">Banned</span>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <button onclick="actionUser('{{ doc.id }}', 'unban')" class="px-3 py-1.5 text-xs font-medium rounded-lg bg-green-500/10 text-green-500 hover:bg-green-500 hover:text-white border border-green-500/20 transition-all shadow-[0_0_15px_rgba(34,197,94,0.1)]">
+                                    Unban
+                                </button>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="3" class="px-6 py-8 text-center text-gray-500">No users are currently blacklisted.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- DMCA Flagged Files Registry -->
+        <div class="glass-card rounded-2xl overflow-hidden shadow-2xl mt-8">
+            <div class="px-6 py-5 border-b border-rose-900/40 bg-rose-500/10">
+                <h3 class="text-lg font-semibold text-rose-100 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Flagged Files Registry (DMCA / Community Reports)
+                </h3>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-400">
+                    <thead class="text-xs text-rose-200 uppercase bg-black/40">
+                        <tr>
+                            <th scope="col" class="px-6 py-4">File Name</th>
+                            <th scope="col" class="px-6 py-4">Uploader</th>
+                            <th scope="col" class="px-6 py-4 text-center">Strikes</th>
+                            <th scope="col" class="px-6 py-4 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-rose-900/30">
+                        {% for file in reported_files %}
+                        <tr class="hover:bg-white/5 transition-colors">
+                            <td class="px-6 py-4 font-medium text-gray-200 max-w-[200px] truncate" title="{{ file.file_name }}">
+                                {{ file.file_name }}
+                            </td>
+                            <td class="px-6 py-4 text-xs text-gray-500">
+                                {{ file.user_id }}
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <span class="px-2.5 py-1 text-xs font-bold rounded-md bg-rose-500/20 text-rose-400 border border-rose-500/30 shadow-[0_0_10px_rgba(244,63,94,0.2)]">{{ file.reports }} Strikes</span>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <button onclick="deleteFile('{{ file._id }}')" class="px-3 py-1.5 text-xs font-medium rounded-lg bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white border border-red-500/30 transition-all shadow-[0_0_15px_rgba(220,38,38,0.2)]">
+                                    Destroy File
+                                </button>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="4" class="px-6 py-8 text-center text-gray-500">Zero active DMCA reports. The database is perfectly clean.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 transform translate-y-20 opacity-0 transition-all duration-300 ease-out z-50 flex items-center w-full max-w-xs p-4 space-x-3 text-gray-300 bg-gray-900 rounded-xl shadow-2xl border border-gray-700" role="alert">
+        <div id="toast-icon" class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg">
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+            </svg>
+        </div>
+        <div id="toast-msg" class="ml-3 text-sm font-normal">Action successful.</div>
+    </div>
+
+    <script>
+        function showToast(msg, isError=false) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-msg');
+            const toastIcon = document.getElementById('toast-icon');
+            
+            toastMsg.textContent = msg;
+            
+            if(isError) {
+                toastIcon.className = "inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-red-900/50 text-red-400";
+            } else {
+                toastIcon.className = "inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-green-900/50 text-green-400";
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        async function actionUser(userId, action) {
+            if(!confirm(`Are you sure you want to ${action} user ${userId}?`)) return;
+            
+            try {
+                // Using relative path to support proxy / proxy manager setups seamlessly
+                const res = await fetch(`admin/${action}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `user_id=${encodeURIComponent(userId)}`
+                });
+                
+                const text = await res.text();
+                
+                if(res.ok) {
+                    showToast(text);
+                    if(action === 'ban' || action === 'unban') {
+                        setTimeout(() => location.reload(), 1500);
+                    }
+                } else {
+                    showToast(`Error: ${text}`, true);
+                }
+            } catch (err) {
+                showToast(`Request failed: ${err.message}`, true);
+            }
+        }
+
+        async function deleteFile(fileId) {
+            if(!confirm(`Are you absolutely sure you want to permanently obliterate this file from the MongoDB registry? This CANNOT be undone.`)) return;
+            
+            try {
+                const res = await fetch(`admin/delete_file`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `file_id=${encodeURIComponent(fileId)}`
+                });
+                
+                const text = await res.text();
+                
+                if(res.ok) {
+                    showToast(text);
+                    setTimeout(() => location.reload(), 1500);
+                } else {
+                    showToast(`Delete Error: ${text}`, true);
+                }
+            } catch (err) {
+                showToast(`Delete Request failed: ${err.message}`, true);
+            }
+        }
+    </script>
+</body>
+</html>

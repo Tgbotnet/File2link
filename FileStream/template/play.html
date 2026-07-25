@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{file_name}} &middot; My File 2 Link</title>
+
+    <meta property="og:site_name" content="My File 2 Link">
+    <meta property="og:title" content="{{file_name}}">
+    <meta property="og:description" content="Stream or download {{file_name}} ({{file_size}}) instantly.">
+    <meta property="og:image" content="{{ server_url }}/logo.png">
+    <meta property="og:type" content="video.other">
+    <meta name="theme-color" content="#0B0F14">
+
+    <link rel="icon" href="/logo.png" type="image/png">
+    <link rel="stylesheet" href="/static/base.css">
+
+    <style>
+        .player-card {
+            background: #000;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .35), 0 18px 44px rgba(0, 0, 0, .45);
+        }
+        video { display: block; width: 100%; max-height: 66vh; background: #000; }
+        .meta {
+            margin-top: 24px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+        }
+        .meta-name {
+            margin: 6px 0 0;
+            font-size: 19px;
+            font-weight: 650;
+            letter-spacing: -0.01em;
+            word-break: break-word;
+            line-height: 1.35;
+        }
+        @media (max-width: 640px) {
+            .meta { padding: 16px 18px; }
+            .meta-name { font-size: 17px; }
+        }
+    </style>
+</head>
+
+<body>
+<div class="shell">
+
+    <header>
+        <div class="header-inner">
+            <a class="brand" href="https://t.me/My_file_2_link_bot">
+                <svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                    <rect width="32" height="32" rx="9" fill="#2783DE"/>
+                    <path d="M13.4 19.6l5.2-5.2" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M15.1 11.9l1.6-1.6a3.6 3.6 0 015.1 5.1l-1.6 1.6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M16.9 20.1l-1.6 1.6a3.6 3.6 0 01-5.1-5.1l1.6-1.6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <span>
+                    <span class="brand-name">My File 2 Link</span>
+                    <span class="brand-by">by Mr.Aman</span>
+                </span>
+            </a>
+            <a class="header-cta" href="https://t.me/My_file_2_link_bot">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3l-3 14.2c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-.9.5l.3-4.6L18.3 6c.4-.3-.1-.5-.6-.2L7.4 12.3l-4.5-1.4c-1-.3-1-1 .2-1.4l17.6-6.8c.8-.3 1.5.2 1.2 1.6z"/></svg>
+                Open Bot
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <div class="player-card">
+            <video id="player" src="{{file_url}}" controls playsinline preload="metadata"></video>
+        </div>
+
+        <div class="meta">
+            <div class="meta-label">Now playing</div>
+            <h1 class="meta-name">{{file_name}}</h1>
+            <div class="chips">
+                <span class="chip"><span class="chip-dot"></span> Ready to stream</span>
+                <span class="chip">Size <strong>{{file_size}}</strong></span>
+                <span class="chip">Resumable &amp; seekable</span>
+            </div>
+        </div>
+
+        <div class="section-head">Download &amp; play</div>
+        <div class="actions">
+            <a class="btn btn-primary" href="{{file_url}}">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span>Download<small>Direct high-speed link</small></span>
+            </a>
+
+            <button class="btn" type="button" onclick="copyLink()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.5.5l3-3a5 5 0 00-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 00-7.5-.5l-3 3a5 5 0 007 7l1.7-1.7"/></svg>
+                <span>Copy link<small>Share it anywhere</small></span>
+            </button>
+
+            <button class="btn" type="button" onclick="openIn('vlc')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l4 15a2 2 0 01-2 2.5H7A2 2 0 015 18L9 3z"/><path d="M9.7 9h4.6"/></svg>
+                <span>VLC Player<small>Desktop &amp; mobile</small></span>
+            </button>
+
+            <button class="btn" type="button" onclick="openIn('mx')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2.5"/><polygon points="10.5 9 15 12 10.5 15" fill="currentColor" stroke="none"/></svg>
+                <span>MX Player<small>Android only</small></span>
+            </button>
+
+            <button class="btn" type="button" onclick="openIn('nplayer')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2.5"/><line x1="10.5" y1="18.5" x2="13.5" y2="18.5"/></svg>
+                <span>nPlayer<small>iOS &amp; iPadOS</small></span>
+            </button>
+
+            <button class="btn btn-danger" type="button" onclick="reportFile()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L2.5 17a2 2 0 001.7 3h15.6a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span>Report file<small>Abuse or copyright</small></span>
+            </button>
+        </div>
+
+        <div class="about">
+            <div class="note">
+                <h3>How it works</h3>
+                <p>Send any file to the bot on Telegram and get a permanent direct link back instantly.</p>
+            </div>
+            <div class="note">
+                <h3>Built for big files</h3>
+                <p>Range requests are fully supported, so you can seek freely and resume interrupted downloads.</p>
+            </div>
+            <div class="note">
+                <h3>Report abuse</h3>
+                <p>Copyrighted or prohibited content is removed on report. Use the report button above.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <span>&copy; 2026 <strong style="color:var(--muted)">Mr.Aman</strong> &middot; My File 2 Link</span>
+            <a href="https://t.me/My_file_2_link_bot">@My_file_2_link_bot</a>
+        </div>
+    </footer>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+    var FILE_URL = new URL("{{file_url}}", window.location.href).href;
+    var FILE_NAME = {{ file_name | tojson }};
+    var DB_ID = "{{ db_id }}";
+
+    function toast(msg) {
+        var t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        clearTimeout(window.__tt);
+        window.__tt = setTimeout(function () { t.classList.remove('show'); }, 2600);
+    }
+
+    function copyLink() {
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(FILE_URL).then(function () {
+                toast('Link copied to clipboard');
+            }, fallbackCopy);
+        } else {
+            fallbackCopy();
+        }
+    }
+
+    function fallbackCopy() {
+        var ta = document.createElement('textarea');
+        ta.value = FILE_URL;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); toast('Link copied to clipboard'); }
+        catch (e) { toast('Copy failed - long-press the link instead'); }
+        document.body.removeChild(ta);
+    }
+
+    function openIn(player) {
+        var target;
+        if (player === 'vlc') {
+            target = 'vlc://' + FILE_URL;
+        } else if (player === 'mx') {
+            target = 'intent:' + FILE_URL + '#Intent;package=com.mxtech.videoplayer.ad;S.title='
+                + encodeURIComponent(FILE_NAME) + ';type=video/*;end';
+        } else {
+            target = 'nplayer-' + FILE_URL;
+        }
+        toast('Opening external player...');
+        window.location.href = target;
+    }
+
+    async function reportFile() {
+        if (!confirm('Report this file for copyright infringement or a policy violation?')) return;
+        try {
+            var res = await fetch('/report/' + DB_ID, { method: 'POST' });
+            toast(res.ok ? 'Report sent to the admin. Thank you.' : 'Could not send the report.');
+        } catch (e) {
+            toast('Could not send the report.');
+        }
+    }
+</script>
+</body>
+</html>

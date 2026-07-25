@@ -1,0 +1,128 @@
+{
+    "name": "My File 2 Link",
+    "description": "Telegram bot by Mr.Aman that turns any Telegram file into a permanent direct download and streaming link.",
+    "keywords": [
+        "telegram",
+        "bot",
+        "file-to-link",
+        "streaming",
+        "direct-link",
+        "pyrogram"
+    ],
+    "logo": "https://raw.githubusercontent.com/MrAman/MyFile2LinkBot/main/logo.png",
+    "success_url": "https://t.me/My_file_2_link_bot",
+    "stack": "container",
+    "env": {
+        "API_ID": {
+            "description": "Your Telegram API ID from my.telegram.org.",
+            "required": true
+        },
+        "API_HASH": {
+            "description": "Your Telegram API hash from my.telegram.org.",
+            "required": true
+        },
+        "BOT_TOKEN": {
+            "description": "Bot token for @My_file_2_link_bot from @BotFather.",
+            "required": true
+        },
+        "OWNER_ID": {
+            "description": "Your numeric Telegram user ID. Get it from @missrose_bot with /info.",
+            "required": true
+        },
+        "DATABASE_URL": {
+            "description": "MongoDB connection string.",
+            "required": true
+        },
+        "FLOG_CHANNEL": {
+            "description": "ID of the private channel where uploaded files are stored. Add the bot as admin.",
+            "required": true
+        },
+        "ULOG_CHANNEL": {
+            "description": "ID of the private channel where new users are logged. Add the bot as admin.",
+            "required": true
+        },
+        "FQDN": {
+            "description": "Public domain of your deployment, e.g. myfile2link.up.railway.app. Leave blank to use the bind address.",
+            "required": false
+        },
+        "HAS_SSL": {
+            "description": "Set to True if your domain is served over HTTPS.",
+            "value": "True",
+            "required": false
+        },
+        "NO_PORT": {
+            "description": "Set to True to leave the port out of generated links (normal for hosted platforms).",
+            "value": "True",
+            "required": false
+        },
+        "PORT": {
+            "description": "Port the web server listens on.",
+            "value": "8080",
+            "required": false
+        },
+        "BOT_USERNAME": {
+            "description": "Bot username without the @.",
+            "value": "My_file_2_link_bot",
+            "required": false
+        },
+        "OWNER_USERNAME": {
+            "description": "Mr.Aman's Telegram username without the @, used for the Contact button.",
+            "value": "My_file_2_link_bot",
+            "required": false
+        },
+        "UPDATES_CHANNEL": {
+            "description": "Public updates channel username without the @.",
+            "value": "My_file_2_link_bot",
+            "required": false
+        },
+        "FORCE_SUB": {
+            "description": "Set to True to require users to join FORCE_SUB_ID before using the bot.",
+            "value": "False",
+            "required": false
+        },
+        "FORCE_SUB_ID": {
+            "description": "Channel ID or username users must join when FORCE_SUB is enabled.",
+            "required": false
+        },
+        "START_PIC": {
+            "description": "Override the built-in /start banner with your own image URL.",
+            "required": false
+        },
+        "FILE_PIC": {
+            "description": "Override the built-in My Files banner with your own image URL.",
+            "required": false
+        },
+        "VERIFY_PIC": {
+            "description": "Override the built-in verification banner with your own image URL.",
+            "required": false
+        },
+        "ADMIN_USERNAME": {
+            "description": "Username for the /admin dashboard. Leave blank to keep the dashboard disabled.",
+            "required": false
+        },
+        "ADMIN_PASSWORD": {
+            "description": "Strong password for the /admin dashboard. Leave blank to keep the dashboard disabled.",
+            "required": false
+        },
+        "AUTH_USERS": {
+            "description": "Space-separated user IDs allowed to use the bot. Leave blank to allow everyone.",
+            "required": false
+        },
+        "WORKERS": {
+            "description": "Number of Pyrogram worker threads.",
+            "value": "6",
+            "required": false
+        },
+        "SLEEP_THRESHOLD": {
+            "description": "Seconds of FloodWait Pyrogram will absorb automatically.",
+            "value": "60",
+            "required": false
+        }
+    },
+    "formation": {
+        "web": {
+            "quantity": 1,
+            "size": "eco"
+        }
+    }
+}
