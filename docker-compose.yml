@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  file2link:
+    build: .
+    image: tgbotworld/file2link:latest
+    container_name: file2link
+    env_file:
+      - .env
+    ports:
+      - "${PORT:-8080}:8080"
+    volumes:
+      # Persist an installed cloudflared binary and any runtime-installed files
+      - ./bin:/app/bin
+      # Optional place to keep uploaded files or runtime data (adjust as needed)
+      - ./data:/app/data
+    restart: unless-stopped
+    environment:
+      # Ensure the app binds to all interfaces inside the container
+      - BIND_ADDRESS=0.0.0.0
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/ || exit 1"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+# Example: if you want to run a local MongoDB for development, uncomment below
+# (the bot expects DATABASE_URL to point to a MongoDB URI):
+#
+# services:
+#   mongo:
+#     image: mongo:6.0
+#     restart: unless-stopped
+#     volumes:
+#       - ./mongo-data:/data/db
+#     environment:
+#       MONGO_INITDB_ROOT_USERNAME: root
+#       MONGO_INITDB_ROOT_PASSWORD: example
+#
+# Usage:
+# - Copy .env.example to .env and fill in required vars (BOT_TOKEN, API_ID, API_HASH, DATABASE_URL, etc.).
+# - docker compose up --build
